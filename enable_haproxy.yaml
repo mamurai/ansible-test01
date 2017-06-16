@@ -1,0 +1,10 @@
+- name: enable haproxy
+  hosts: all
+ 
+  vars:
+    POOL: app
+    HOST: app1
+  tasks:
+
+  - name: haproxy enabled
+    shell: echo "enable server {{POOL}}/{{HOST}}" | socat stdio /var/lib/haproxy/stats

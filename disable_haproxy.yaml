@@ -1,0 +1,10 @@
+- name: disable haproxy
+  hosts: all
+ 
+  vars:
+    POOL: app
+    HOST: app1
+  tasks:
+
+  - name: haproxy disabled
+    shell: echo "disable server {{POOL}}/{{HOST}}" | socat stdio /var/lib/haproxy/stats
