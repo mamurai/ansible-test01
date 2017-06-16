@@ -1,0 +1,10 @@
+- name: update nginx
+  hosts: all
+
+  tasks:
+ 
+  # Update nginx package
+  - name: Update packages
+    yum: name={{ item }} state=latest
+    with_items:
+      - nginx
