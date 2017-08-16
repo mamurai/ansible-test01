@@ -1,0 +1,14 @@
+- name: modify haproxy.conf
+  hosts: all
+  remote_user: root
+  vars:
+    APP1: 54.64.1.170
+    APP2: 13.114.133.18
+
+  tasks:
+  - name: Stop haproxy.service
+    service: name=haproxy state=stopped
+  - name: HAproxy config file     
+    template: src=/templates/haproxy/haproxy.cfg.j2 dest=/etc/haproxy/haproxy.conf
+  - name: Start haproxy.service
+    service: name=haproxy state=started
