@@ -9,6 +9,6 @@
   - name: Stop haproxy.service
     service: name=haproxy state=stopped
   - name: HAproxy config file     
-    template: src=templates/haproxy/haproxy.cfg.j2 dest=/etc/haproxy/haproxy.conf
+    template: src=templates/haproxy/haproxy.cfg.j2 dest=/etc/haproxy/haproxy.cfg
   - name: Start haproxy.service
     service: name=haproxy state=started
