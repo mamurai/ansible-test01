@@ -2,8 +2,8 @@
   hosts: all
   vars:
     NGINX_PORT: 81
-    HTML_SRC: templates/nginx/html/index.html.j2
-    HTML_DEST: /usr/share/nginx/html/index.html
+    HTML_SRC: templates/nginx/html/status.html.j2
+    HTML_DEST: /usr/share/nginx/html/status.html
 
   tasks:
  
@@ -17,12 +17,12 @@
     shell : date "+%Y/%m/%d %H:%M:%S"
     register: date
 
-  # Modify index.html
-  - name: Modify index.html
-    template: src={{ HTML_SRC }} dest={{ HTML_DEST }}
-    notify: restert nginx
+  # Get Enginx Status
+  - name: Get Nginx Status
+    shell : systemctl status nginx | sed -z 's/\n/<br>/g'
+    register: nginx_status
 
-  # Reboot Handler
-  handlers:
-    - name: restert nginx
-      service: name=nginx state=restarted
+  # Modify status.html
+  - name: Create status.html
+    template: src={{ HTML_SRC }} dest={{ HTML_DEST }}
+
